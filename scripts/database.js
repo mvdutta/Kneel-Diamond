@@ -33,9 +33,16 @@ const database = {
             styleId: 3,
             timestamp: 1614659931693
         }
-    ]
+    ],
+    orderBuilder: {
+        metalId: 0,
+        styleId: 0,
+        sizeId: 0,
+      
+    },
 }
 
+// No other modules are allowed to have direct access to the database. That's why you have exported functions that return copies of the current state. Other modules invoke those function to get state.
 export const getMetals = () => {
     return database.metals.map(metal => ({...metal}))
 }
@@ -47,5 +54,38 @@ export const getStyles = () => {
     return database.styles.map(style => ({...style}))
 }
 export const getOrders = () => {
-    return database.orders.map(order => ({...order}))
+    return database.customOrders.map(order => ({...order}))
+}
+// Now you need to export functions whose responsibility is to set state. Setter functions can modify data and insert data into the database
+export const setMetal = (id) => {
+    database.orderBuilder.metalId = id//the id that's coming in as the input of the function will be stored in the property of the metalId
+}
+
+export const setSize = (id) => {
+    database.orderBuilder.sizeId = id
+}
+
+export const setStyle = (id) => {
+    database.orderBuilder.styleId = id
+}
+
+export const addCustomOrder = () => {
+    // Copy the current state of user choices
+    const newOrder = {...database.orderBuilder}//use spread operator to make a copy of the orderBuilder object
+
+    // Add a new primary key (iD) to the orderBuilder object
+    const lastIndex = database.customOrders.length - 1
+    newOrder.id = database.customOrders[lastIndex].id + 1
+
+    // Add a timestamp to the orderBuilder object
+    newOrder.timestamp = Date.now()// in-built JS function that gives the time right now
+
+    // Add the new order object to custom orders state
+    database.customOrders.push(newOrder)
+
+    // Reset the temporary state for user choices
+    database.orderBuilder = {}
+
+    // Broadcast a notification that permanent state has changed
+    document.dispatchEvent(new CustomEvent("stateChanged"))
 }
