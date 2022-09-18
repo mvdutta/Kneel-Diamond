@@ -11,8 +11,10 @@ const buildOrderListItem = (order) => {
     //next, interpolate the price in the HTML string
     const costString = totalCost.toLocaleString("en-US", {style: 
     "currency", currency: "USD"})
+
+    const dateObj = new Date(order.timestamp)
     return `<li>
-        Order #${order.id} was placed on ${order.timestamp} and costs ${costString}
+        Order #${order.id} was placed on ${dateObj.toDateString()} and costs ${costString}
     </li>`
 }
 
