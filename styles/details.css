@@ -2,7 +2,7 @@
 .choices {
     display: flex;
     justify-content: space-between;
-    width: 65%;
+    width: 55%;
 
 }
 .options {
@@ -12,7 +12,7 @@
     padding: 1rem;
     border-radius: 0.5rem;
     box-shadow: 0.25rem 0.25rem 0.5rem rgb(162, 189, 224);
-    width: 70%;
+    width: 20%;
 }
 
 #container {

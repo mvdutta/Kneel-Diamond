@@ -1,4 +1,4 @@
-import { getMetals, getOrders } from "./database.js"
+import { getMetals, getOrders, getSizes, getStyles } from "./database.js"
 
 const buildOrderListItem = (order) => {
     const metals = getMetals()//getting a list of metal objects
@@ -7,7 +7,19 @@ const buildOrderListItem = (order) => {
             return metal.id === order.metalId //if these two are equal, then true is returned. If not equal, then false is returned. 
         }
     )
-    const totalCost = foundMetal.price ///found the price of this metal
+    const styles = getStyles()//getting a list of style objects
+    const foundStyle = styles.find(
+        (style) => {
+            return style.id === order.styleId 
+        }
+    )
+    const sizes = getSizes()//getting a list of size objects
+    const foundSize = sizes.find(
+        (size) => {
+            return size.id === order.sizeId 
+        }
+    )
+    const totalCost = foundMetal.price + foundStyle.price + foundSize.price//add all of the above prices to totalCost string
     //next, interpolate the price in the HTML string
     const costString = totalCost.toLocaleString("en-US", {style: 
     "currency", currency: "USD"})
