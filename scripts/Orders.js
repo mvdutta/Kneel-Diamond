@@ -12,9 +12,9 @@ const buildOrderListItem = (order) => {
     const costString = totalCost.toLocaleString("en-US", {style: 
     "currency", currency: "USD"})
 
-    const dateObj = new Date(order.timestamp)
+    const dateObj = new Date(order.timestamp)//added dateObj with new Date to display current date. Then used dateObj.toDateString() below to return the date in a human readable format
     return `<li>
-        Order #${order.id} was placed on ${dateObj.toDateString()} and costs ${costString}
+        Order #${order.id} was placed on ${dateObj.toLocaleDateString()} and costs ${costString}
     </li>`
 }
 
