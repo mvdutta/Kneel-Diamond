@@ -21,13 +21,13 @@ const buildOrderListItem = (order) => {
     )
     const totalCost = foundMetal.price + foundStyle.price + foundSize.price//add all of the above prices to totalCost string
     //next, interpolate the price in the HTML string
-    const costString = totalCost.toLocaleString("en-US", {style: 
+   const costString = totalCost.toLocaleString("en-US", {style: 
     "currency", currency: "USD"})
 
     const dateObj = new Date(order.timestamp)//added dateObj with new Date to display current date. Then used dateObj.toDateString() below to return the date in a human readable format
     return `<li>
         Order #${order.id} was placed on ${dateObj.toLocaleDateString()} and costs ${costString}
-    </li>`
+    </li>` 
 }
 
 export const Orders = () => {

@@ -25,6 +25,24 @@ const database = {
         { id: 4, metal: "Platinum", price: 795.45 },
         { id: 5, metal: "Palladium", price: 1241.0 }
     ],
+    items: [
+        {
+          id: 1,
+          type: "Ring",
+          priceMultiplier: 1,
+        },
+        {
+          id: 2,
+          type: "Earring",
+          priceMultiplier: 2,
+        },
+        {
+          id: 3,
+          type: "Necklace",
+          priceMultiplier: 4,
+        }
+
+    ],
     customOrders: [
         {
             id: 1,
@@ -38,6 +56,7 @@ const database = {
         metalId: 0,
         styleId: 0,
         sizeId: 0,
+        itemId: 0,
       
     },
 }
@@ -56,9 +75,12 @@ export const getStyles = () => {
 export const getOrders = () => {
     return database.customOrders.map(order => ({...order}))
 }
+export const getItem = () => {
+    return database.items.map(item => ({...item}))
+}
 // Now you need to export functions whose responsibility is to set state. Setter functions can modify data and insert data into the database
 export const setMetal = (id) => {
-    database.orderBuilder.metalId = id//the id that's coming in as the input of the function will be stored in the property of the metalId
+    database.orderBuilder.metalId = id//the id that's coming in as the input of the function will be stored in the property of the metalId in orderBuilder
 }
 
 export const setSize = (id) => {
@@ -68,6 +90,10 @@ export const setSize = (id) => {
 export const setStyle = (id) => {
     database.orderBuilder.styleId = id
 }
+export const setItem = (id) => {
+    database.orderBuilder.itemId = id
+}
+
 
 export const addCustomOrder = () => {
     // Copy the current state of user choices

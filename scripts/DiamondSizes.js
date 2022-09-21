@@ -22,7 +22,7 @@ export const DiamondSizes = () => {
             <input type="radio" name="size" value="${size.id}" /> ${size.carats}
         </li>`
     })
-    // So an object comes into your function, and a string gets returned. That string goes into a new array. Because .map() produces a new array with the items items of the original array transformed based on our instructions(the function we gave to map), we need to use .join() to join the individual strings together b/c we don't want an array
+    // So an object (size) comes into your function, and a string gets returned. That string goes into a new array, because .map() produces a new array with the items items of the original array transformed based on our instructions(the function we gave to map), we need to use .join() to join the individual strings together b/c we don't want an array
      html += listItems.join("")//joins strings in the array list items together. In this case, the separator (i.e what goes inside the parenthesis) is an empty string, which means there will be nothing in between the list items. You can put anything inside the (), and that will appear between the list items
     html += "</ul>"
 
