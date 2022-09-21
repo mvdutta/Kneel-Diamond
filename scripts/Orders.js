@@ -1,4 +1,4 @@
-import { getMetals, getOrders, getSizes, getStyles } from "./database.js"
+import { getItem, getMetals, getOrders, getSizes, getStyles } from "./database.js"
 
 const buildOrderListItem = (order) => {
     const metals = getMetals()//getting a list of metal objects
@@ -19,7 +19,13 @@ const buildOrderListItem = (order) => {
             return size.id === order.sizeId 
         }
     )
-    const totalCost = foundMetal.price + foundStyle.price + foundSize.price//add all of the above prices to totalCost string
+    const items = getItem() 
+    const foundItem = items.find(
+        (item) => {
+            return item.id === order.itemId
+        }
+    )
+    const totalCost = (foundMetal.price + foundStyle.price + foundSize.price) * foundItem.priceMultiplier //add all of the above prices to totalCost string
     //next, interpolate the price in the HTML string
    const costString = totalCost.toLocaleString("en-US", {style: 
     "currency", currency: "USD"})
